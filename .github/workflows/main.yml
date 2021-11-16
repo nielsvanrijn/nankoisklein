@@ -1,0 +1,29 @@
+---
+name: Dokku
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloning repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Push to dokku
+        uses: dokku/github-action@v1.0.1
+        with:
+          git_remote_url: 'ssh://dokku@vmi506946.contaboserver.net:22/nankoisklein'
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          
+      - name: Notify
+        uses: fjogeleit/http-request-action@master
+        with:
+          url: 'https://api.pushcut.io/v1/notifications/github_deploy_done?title=Deploy successfull&text=Development branch of nankoisklein applicaton was successfully deployed to dokku!'
+          method: 'POST'
+          customHeaders: "{\"API-key\": \"${{ secrets.PUSHCUT_API_KEY }}\"}"
