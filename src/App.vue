@@ -5,7 +5,7 @@
 	</div>
 	<router-view/> -->
 	<main>
-		<h1>Vroom! Vroom! Vroom!</h1>
+		<h1>Vroom! Vroom! Vroomm!</h1>
 		<h2>Aww, stoer hoor Nanko</h2>
 		<h2>Ga je lekker spelen op je motorfietsje?</h2>
 	</main>
